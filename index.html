@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="SceneAdapt: ">
+  <meta name="keywords" content="SceneAdapt: Scene-aware Adaptation of Human Motion Diffusion">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SceneAdapt: Scene-aware Adaptation of Human Motion Diffusion</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">SceneAdapt: Scene-aware Adaptation of Human Motion Diffusion</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="">Anonymous Author<sup></sup></a>,</span>
+          </div>
+          <div class="column has-text-centered">
+            <div class="publication-links">
+            </div>
+          </div>
+          <div class="is-size-5 conference-block">
+            <span class="conference-block">Open during ICLR 2026 Rebuttal</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <!-- TODO: check grammar  -->
+        <!-- <div class="content has-text-justified">
+          <img src="./static/images/teaser.png" alt="Teaser Image" style="width: 100%; height: auto; object-fit: cover;">
+        </div> -->
+
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Human motion is inherently diverse and semantically rich, while also shaped by the surrounding scene. 
+            However, existing motion generation approaches address either motion semantics or scene-awareness in isolation, since constructing large-scale datasets with both rich text-motion coverage and precise scene interactions is extremely challenging.
+            In this work, we introduce <strong>SceneAdapt</strong>, a framework that injects scene awareness into text-conditioned motion models by leveraging disjoint scene–motion and text–motion datasets through two adaptation stages: inbetweening and scene-aware inbetweening. 
+            The key idea is to use motion inbetweening, learnable without text, as a proxy task to bridge two distinct datasets and thereby inject scene-awareness to text-to-motion models.
+            In the first stage, we introduce keyframing layers that modulate motion latents for inbetweening while preserving the latent manifold. 
+            In the second stage, we add a scene-conditioning layer that injects scene geometry by adaptively querying local context through cross-attention.
+            Experimental results show that <strong>SceneAdapt</strong> effectively injects scene awareness into text-to-motion models, and we further analyze the mechanisms through which this awareness emerges. Code and models will be released.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+    <!-- Paper video. -->
+    <!-- <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Video</h2>
+        <div class="publication-video">
+          <iframe src="https://www.youtube.com/embed/MrKrnHhk8IA?rel=0&amp;showinfo=0"
+                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div> -->
+    <!--/ Paper video. -->
+
+    <!-- Overview -->
+
+    <br>
+    <br>
+    
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Motivation</h2>
+        <div class="content has-text-justified">
+          <img src="./static/images/motivation_cap.png" alt="Motivation" style="width: 100%; height: auto; object-fit: cover; object-position: 0 -5px;">
+          <p>
+            (a) Distribution of motion embeddings extracted with the feature extractor (HumanML3D) and visualized via PCA. 
+            HSI datasets (HUMANISE, TRUMANS) show narrower distributions than T2M dataset(HumanML3D), indicating lower diversity. 
+            (b) Models trained on T2M datasets capture diverse action semantics but lack scene awareness. 
+            (c) Models trained on HSI datasets satisfy scene constraints but fail to follow text conditions.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <br>
+    <br>
+    
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Overview</h2>
+        <div class="content has-text-justified">
+          <img src="./static/images/overview_cap.png" alt="Method Overview" style="width: 100%; height: auto; object-fit: cover; object-position: -5px 0;">
+          <p>
+            <b>Stage 0</b>: Pretrain text-to-motion model (MDM).
+            <b>Stage 1</b>: Insert CaKey layers and train them with a motion inbetweening objective, which only requires motion sequences. 
+            <b>Stage 2</b>: Add scene-conditioning layers and train them with a scene-aware inbetweening objective, using scene-motion pairs.
+            <b>Inference</b>: Only use the base model and ScenCo layers for scene-aware text-to-motion generation.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <!-- <div class="content has-text-centered">
+      <a class="icon-link"
+         href="./static/videos/nerfies_paper.pdf">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div> -->
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website uses the <a href="https://github.com/nerfies/nerfies.github.io">nerfies.github.io</a> template.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
